@@ -1,13 +1,13 @@
 const Lesson17 = (props) => {
     //JS có 7 loại Primitive datatypes:
     //1. Strings
-    let greeting = 'Hi';
-    let message = "Bye";
+    // let greeting = 'Hi';
+    // let message = "Bye";
 
-    console.log(">>> check greeting === ", greeting);
-    console.log(">>> check datatype message === ", typeof message)
+    // console.log(">>> check greeting === ", greeting);
+    // console.log(">>> check datatype message === ", typeof message)
 
-    let message2 = 'I\'m also a valid string';
+    // let message2 = 'I\'m also a valid string';
     // use \ to escape the single quote (')
     // console.log(">>> check message === ", message2);
     //template strings (ES6)
