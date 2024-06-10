@@ -12,6 +12,8 @@ const SuperFormV2 = (props) => {
         // }
         // console.log(">>> check form data:", initForm);
     }
+
+    console.log("Check new render!");
     return (
         <>
             <div> <button onClick={handleCheckData}>Check data</button></div>
