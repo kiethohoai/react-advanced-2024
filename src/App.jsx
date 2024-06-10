@@ -12,6 +12,7 @@ import Lesson7 from './lessons/Lesson7/Lesson7';
 import Lesson8 from './lessons/Lesson8/Lesson8';
 import Lesson9 from './lessons/Lesson9/Lesson9';
 import Lesson10 from './lessons/Lesson10/Lesson10';
+import Lesson17 from './lessons/chapter3/Lesson17';
 
 
 const App = () => {
@@ -19,14 +20,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <NavBar />
+      {/* <NavBar /> */}
       {/* <Content
         count={count}
         setCount={setCount}
       /> */}
-      <Lesson10 />
+      <Lesson17 />
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
