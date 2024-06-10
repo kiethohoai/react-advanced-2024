@@ -10,6 +10,7 @@ import Lesson5 from './lessons/Lesson5/Lesson5';
 import Lesson6 from './lessons/Lesson6/Lesson6';
 import Lesson7 from './lessons/Lesson7/Lesson7';
 import Lesson8 from './lessons/Lesson8/Lesson8';
+import Lesson9 from './lessons/Lesson9/Lesson9';
 
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
         count={count}
         setCount={setCount}
       /> */}
-      <Lesson8 />
+      <Lesson9 />
 
       <Footer />
     </div>
