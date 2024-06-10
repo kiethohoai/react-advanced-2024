@@ -1,27 +1,34 @@
 const Lesson21 = (props) => {
 
-    let counter = 1;
-    let copiedCounter = counter;
-    copiedCounter = 2;
+    // let counter = 1;
+    // let copiedCounter = counter;
+    // copiedCounter = 2;
 
-    console.log(" counter = ", counter, " and copiedCounter = ", copiedCounter)
+    // console.log(" counter = ", counter, " and copiedCounter = ", copiedCounter)
 
 
     let person = {
-        firstName: 'Eric',
-        lastName: 'Hỏi Dân IT'
+        firstName: 'HO HOAI',
+        lastName: 'KIET'
     };
+
     //
-    let copiedPerson = person;
+    // let copiedPerson = person;
 
-    copiedPerson.firstName = 'Hary Pham';
+
+    // copiedPerson.firstName = 'Ho Hoai';
+    // console.log("🚀CHECK  file: Lesson21.jsx:16  copiedPerson =", copiedPerson)
     // console.log(">>> check person: ", person);
 
-    // 
-    // let copiedPerson2 = { ...person }
-    // copiedPerson2.firstName = 'Hary Pham';
-    // console.log(">>> check person: ", person);
-    // console.log(">>> check copied person: ", copiedPerson2);
+
+    let personCopy = { ...person }
+    personCopy.firstName = "David Ho"
+    personCopy.lastName = "Hoai Kiet"
+
+    console.log("🚀CHECK  file: Lesson21.jsx:14  person =", person)
+    console.log("🚀CHECK  file: Lesson21.jsx:24  personCopy =", personCopy)
+
+
 
 
     return (
