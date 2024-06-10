@@ -10,8 +10,6 @@ const Lesson20 = (props) => {
 
     console.log(">>> check person: ", person);
     console.log(">>> check member: ", member);
-
-
     return (
         <div>
             Lesson 20: What's wrong with 'normal' assign/copy ?
