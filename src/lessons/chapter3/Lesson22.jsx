@@ -1,15 +1,26 @@
 const Lesson22 = (props) => {
-    const obj = {
-        name: 'abc',
-        address: 'hn',
+    // const obj = {
+    //     name: 'Hồ Hoài Kiệt',
+    //     address: 'Đà Nẵng',
 
-        //
-        name: 'def'
-    }
+    //     //Overwrite
+    //     name: 'Kiệt Hồ Hoài',
+    //     phone: "0934.979.641"
+    // }
+    // console.log("🚀CHECK  obj =>", obj)
 
-    console.log(">>> ", obj)
+    // #2
+    // let object = {
+    //     name: "ho hoai kiet",
+    //     address: "thua thien hue",
+    // }
+    // console.log("🚀CHECK  object =>", object)
 
-    // ví dụ về copy:
+
+    // let objectCopy = { ...object, name: "David Ho", phone: "0935664313" }
+    // console.log("🚀CHECK  objectCopy =>", objectCopy)
+
+    // #3
     const person = {
         name: 'abc',
         address: {
@@ -24,6 +35,15 @@ const Lesson22 = (props) => {
             }
         }
     }
+    console.log("🚀CHECK  person =>", person)
+
+    const personClone = {
+        ...person, address: {
+            ...person.address,
+            city: "hcm",
+        }
+    }
+    console.log("🚀CHECK  personClone =>", personClone)
 
     // modify directly
     // const clone = { ...person };
@@ -31,19 +51,19 @@ const Lesson22 = (props) => {
     // clone.address.city = 'hcm'; //2 level deep => not ok
 
     // spread syntax
-    const clone = {
-        ...person,
-        address: {
-            ...person.address,
-            city: 'hcm'
-        }
-    }
+    // const clone = {
+    //     ...person,
+    //     address: {
+    //         ...person.address,
+    //         city: 'hcm'
+    //     }
+    // }
 
     //   console.log(">>> check person: ", person, ' clone= ', clone)
 
     return (
         <div>
-            Lesson 22;
+            Lesson 22!
         </div>
     )
 }
