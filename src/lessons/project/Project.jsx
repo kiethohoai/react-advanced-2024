@@ -1,13 +1,14 @@
 import Login from "./Login"
 import './Project.scss';
-import Lesson25 from "./chapter3/Lesson25";
 import 'nprogress/nprogress.css';
+import Lesson25 from "./chapter3/Lesson25";
+import Lesson26 from "./chapter4/lesson26/Lesson26";
 
 const Project = (props) => {
     return (
         <div className="project">
             <Login />
-            <Lesson25 />
+            <Lesson26 />
 
         </div>
     )

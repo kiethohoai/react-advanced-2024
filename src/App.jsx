@@ -18,7 +18,6 @@ const App = () => {
       /> */}
       <Project />
 
-
       <Footer />
     </div>
   )

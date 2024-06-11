@@ -1,0 +1,32 @@
+.detail-user {
+    border: 1px solid rgb(115, 112, 112);
+    border-radius: 6px;
+    width: 20vw;
+    height: 40vh;
+    overflow: hidden;
+
+    .user-id {
+        margin: 4px 0 0 4px;
+    }
+
+    .user-username {
+        margin: 4px 0 4px 4px;
+    }
+
+    .user-image {
+        width: 100%;
+        height: 28vh;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .user-button {
+        margin-top: 16px;
+        margin-left: 4px;
+    }
+
+}
