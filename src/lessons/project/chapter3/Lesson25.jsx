@@ -1,3 +1,5 @@
+import _ from "lodash"
+
 const Lesson25 = (props) => {
     const person = {
         name: 'abc',
@@ -13,6 +15,11 @@ const Lesson25 = (props) => {
             }
         }
     }
+    console.log("🚀CHECK  person =>", person)
+    const personClone = _.cloneDeep(person)
+    personClone.job.title = "Software Engineer"
+    personClone.job.detail.salary = "10K"
+    console.log("🚀CHECK  personClone =>", personClone)
 
     return (
         <div>
