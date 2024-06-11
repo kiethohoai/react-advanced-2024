@@ -4,12 +4,7 @@ import "./User.scss";
 const User = (props) => {
     const { data } = props;
     const [show, setShow] = useState(true);
-    console.log("🚀CHECK  data =>", data);
     const [isShowImage, setIsShowImage] = useState(true);
-
-    const handleShowHideImage = () => {
-        setIsShowImage(!isShowImage);
-    }
 
     return (
         <div className="detail-user">
@@ -24,7 +19,7 @@ const User = (props) => {
             </div>}
 
             <div className="user-button">
-                <button onClick={() => handleShowHideImage()}>Hide/Show Images</button>
+                <button onClick={() => setIsShowImage(!isShowImage)}>Hide/Show Images</button>
             </div>
         </div>
     );
