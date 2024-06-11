@@ -1,7 +1,6 @@
 import Login from "./Login"
 import './Project.scss';
-import 'nprogress/nprogress.css';
-import Lesson25 from "./chapter3/Lesson25";
+import "nprogress/nprogress.css";
 import Lesson26 from "./chapter4/lesson26/Lesson26";
 
 const Project = (props) => {

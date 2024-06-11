@@ -19,29 +19,34 @@ import "./Homework26.scss"
  */
 
 const Homework26 = (props) => {
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        fetchUsersWithPaginate();
-    }, [])
+  // const [listUsers, setListUsers] = useState([]);
+  // useEffect(() => {
+  //   fetchUsersWithPaginate();
+  // }, []);
 
-    const fetchUsersWithPaginate = async () => {
-        let res = await getUserWithPaginate(1, 3);
-        if (res && res.EC === 0) {
-            setData(res.DT.users)
-        }
-    }
+  // const fetchUsersWithPaginate = async () => {
+  //   let res = await getUserWithPaginate(1, 3);
+  //   if (res && res.EC === 0) {
+  //     setListUsers(res.DT.users);
+  //   }
+  // };
+  const { listUsers } = props;
 
-    return (
-        <div className="homework-container">
-            {data && data.length > 0 && data.map((item, index) => {
-                return (
-                    <div key={`user-${index + 1}`} >
-                        <div className="home-user"><User data={item} /></div>
-                    </div>
-                )
-            })}
-        </div>
-    )
+  return (
+    <div className="homework-container">
+      {listUsers &&
+        listUsers.length > 0 &&
+        listUsers.map((item, index) => {
+          return (
+            <div key={`user-${index + 1}`}>
+              <div className="home-user">
+                <User data={item} />
+              </div>
+            </div>
+          );
+        })}
+    </div>
+  );
 }
 
 export default Homework26;
