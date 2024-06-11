@@ -1,11 +1,11 @@
 const Lesson24 = (props) => {
     //data types: string
-    let data = '{"name":"John", "age":30, "city":"New York"}'
+    // let data = '{"name":"John", "age":30, "city":"New York"}'
 
-    //  sử dụng JSON.parse sẽ convert text thành javascript object
-    const obj = JSON.parse(data);
-    //  const obj = JSON.parse('{"name":"John", "age":30, "city":"New York"}');
-
+    //  sử dụng JSON.parse sẽ convert text (JSON Formart) thành javascript object
+    // const obj = JSON.parse(data);
+    // console.log("🚀CHECK  obj =>", obj)
+    // const obj = JSON.parse('{"name":"John", "age":30, "city":"New York"}');
 
 
     //  ==========
@@ -14,8 +14,10 @@ const Lesson24 = (props) => {
 
     //   (json.parse() => convert từ string - JSON format, thành js object)
 
-    //  const obj = {name: "John", age: 30, city: "New York"};
-    //  const myJSON = JSON.stringify(obj);
+    // const obj = { name: "John", age: 30, city: "New York" };
+    // const myJSON = JSON.stringify(obj);
+    // console.log("🚀CHECK  obj =>", obj)
+    // console.log("🚀CHECK  myJSON =>", myJSON)
 
     //typeof myJSON === 'string
 
@@ -36,10 +38,14 @@ const Lesson24 = (props) => {
             }
         }
     }
+    console.log("🚀CHECK  person =>", person)
 
     //convert object to string => tạo 1 vùng bộ mới trong stack (primitive values)
     //convert string to object => tạo 1 bộ mới trong heap (object values)
     const clone = JSON.parse(JSON.stringify(person));
+    clone.job.title = "Software Engineer"
+    clone.job.detail.salary = "10K"
+    console.log("🚀CHECK  clone =>", clone)
 
     //    console.log(">>> check person: ", person, ' clone:', clone);
 
