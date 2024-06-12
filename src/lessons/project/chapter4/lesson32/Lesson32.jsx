@@ -6,13 +6,14 @@ const Lesson32 = (props) => {
     });
 
     const handleModify = () => {
-        info.name = "modify Eric";
-        info.age = "35";
+      // bad code don't do that => Bugs
+      // info.name = "modify Eric";
+      // info.age = "35";
 
-        // setInfo({
-        //   name: "modify",
-        //   age: 35
-        // });
+      setInfo({
+        name: "modify",
+        age: 35,
+      });
     };
 
     const handleDoSth = () => {
