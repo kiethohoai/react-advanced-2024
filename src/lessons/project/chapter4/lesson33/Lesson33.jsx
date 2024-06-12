@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 
 const Lesson33 = (props) => {
-    const [person, setPerson] = useState(
-        {
-            username: '',
-            email: 'Hỏi Dân IT',
-            password: ''
-        }
-
-    )
+    const [person, setPerson] = useState({
+      username: "",
+      email: "hohoaikiet@gmail.com",
+      password: "",
+    });
 
     const handleOnChangeUsername = (event) => {
-        // person.username = event.target.value;
-        //not merge
-        setPerson({ username: event.target.value })
-    }
+      // person.username = event.target.value;
+
+      //not merge
+      setPerson({ ...person, username: event.target.value });
+    };
 
     const handleSubmit = () => {
         console.log(">>> check data person: ", person)
