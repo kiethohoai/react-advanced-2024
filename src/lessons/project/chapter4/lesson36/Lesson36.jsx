@@ -29,21 +29,34 @@ const Lesson36 = () => {
     { id: 2, title: "Terracotta Army", seen: true },
   ];
 
-  const [myList, setMyList] = useState(initialList);
-  const [yourList, setYourList] = useState(initialList);
+  //   const [myList, setMyList] = useState(initialList);
+  const [myList, setMyList] = useImmer(initialList);
+
+  //   const [yourList, setYourList] = useState(initialList);
+  const [yourList, setYourList] = useImmer(initialList);
 
   function handleToggleMyList(artworkId, nextSeen) {
-    const myNextList = [...myList];
-    const artwork = myNextList.find((a) => a.id === artworkId);
-    artwork.seen = nextSeen;
-    setMyList(myNextList);
+    // const myNextList = [...myList];
+    // const artwork = myNextList.find((a) => a.id === artworkId);
+    // artwork.seen = nextSeen;
+    // setMyList(myNextList);
+
+    setMyList((draft) => {
+      const artwork = draft.find((a) => a.id === artworkId);
+      artwork.seen = nextSeen;
+    });
   }
 
   function handleToggleYourList(artworkId, nextSeen) {
-    const yourNextList = [...yourList];
-    const artwork = yourNextList.find((a) => a.id === artworkId);
-    artwork.seen = nextSeen;
-    setYourList(yourNextList);
+    // const yourNextList = [...yourList];
+    // const artwork = yourNextList.find((a) => a.id === artworkId);
+    // artwork.seen = nextSeen;
+    // setYourList(yourNextList);
+
+    setYourList((draft) => {
+      const artwork = draft.find((a) => a.id === artworkId);
+      artwork.seen = nextSeen;
+    });
   }
 
   return (
