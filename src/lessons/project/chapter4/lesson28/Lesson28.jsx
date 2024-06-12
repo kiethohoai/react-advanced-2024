@@ -4,9 +4,9 @@ const Lesson28 = () => {
   const [number, setNumber] = useState(0);
 
   const handleIncrease = () => {
-    setNumber(number + 1);
-    setNumber(number + 1);
-    setNumber(number + 1);
+    setNumber((number) => number + 1);
+    setNumber((number) => number + 1);
+    setNumber((number) => number + 1);
   };
 
   return (
