@@ -1,75 +1,62 @@
-import { useState } from 'react';
-import { useImmer } from 'use-immer';
+import { useState } from "react";
+import { useImmer } from "use-immer";
 
 const ItemList = ({ artworks, onToggle }) => {
-    return (
-        <ul>
-            {artworks.map(artwork => (
-                <li key={artwork.id}>
-                    <label>
-                        <input
-                            type="checkbox"
-                            checked={artwork.seen}
-                            onChange={e => {
-                                onToggle(
-                                    artwork.id,
-                                    e.target.checked
-                                );
-                            }}
-                        />
-                        {artwork.title}
-                    </label>
-                </li>
-            ))}
-        </ul>
-    );
-}
+  return (
+    <ul>
+      {artworks.map((artwork) => (
+        <li key={artwork.id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={artwork.seen}
+              onChange={(e) => {
+                onToggle(artwork.id, e.target.checked);
+              }}
+            />
+            {artwork.title}
+          </label>
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 const Lesson36 = () => {
-    const initialList = [
-        { id: 0, title: 'Big Bellies', seen: false },
-        { id: 1, title: 'Lunar Landscape', seen: false },
-        { id: 2, title: 'Terracotta Army', seen: true },
-    ];
+  const initialList = [
+    { id: 0, title: "Big Bellies", seen: false },
+    { id: 1, title: "Lunar Landscape", seen: false },
+    { id: 2, title: "Terracotta Army", seen: true },
+  ];
 
-    const [myList, setMyList] = useState(initialList);
-    const [yourList, setYourList] = useState(
-        initialList
-    );
+  const [myList, setMyList] = useState(initialList);
+  const [yourList, setYourList] = useState(initialList);
 
-    function handleToggleMyList(artworkId, nextSeen) {
-        const myNextList = [...myList];
-        const artwork = myNextList.find(
-            a => a.id === artworkId
-        );
-        artwork.seen = nextSeen;
-        setMyList(myNextList);
-    }
+  function handleToggleMyList(artworkId, nextSeen) {
+    const myNextList = [...myList];
+    const artwork = myNextList.find((a) => a.id === artworkId);
+    artwork.seen = nextSeen;
+    setMyList(myNextList);
+  }
 
-    function handleToggleYourList(artworkId, nextSeen) {
-        const yourNextList = [...yourList];
-        const artwork = yourNextList.find(
-            a => a.id === artworkId
-        );
-        artwork.seen = nextSeen;
-        setYourList(yourNextList);
-    }
+  function handleToggleYourList(artworkId, nextSeen) {
+    const yourNextList = [...yourList];
+    const artwork = yourNextList.find((a) => a.id === artworkId);
+    artwork.seen = nextSeen;
+    setYourList(yourNextList);
+  }
 
-    return (
-        <>
-            <div>Lesson 36: Arrays with Objects</div>
-            <h3>Art Bucket List</h3>
-            <h3>My list of art to see:</h3>
-            <ItemList
-                artworks={myList}
-                onToggle={handleToggleMyList} />
-            <h3>Your list of art to see:</h3>
-            <ItemList
-                artworks={yourList}
-                onToggle={handleToggleYourList} />
-        </>
-    );
-}
+  return (
+    <>
+      <div>Lesson 36: Arrays with Objects</div>
+      <h3>Art Bucket List</h3>
+      <h3>My list of art to see:</h3>
+      <ItemList artworks={myList} onToggle={handleToggleMyList} />
+      <h3>Your list of art to see:</h3>
+      <ItemList artworks={yourList} onToggle={handleToggleYourList} />
+    </>
+  );
+};
 
 // const Lesson36 = () => {
 //     const initialList = [
@@ -115,6 +102,5 @@ const Lesson36 = () => {
 //         </>
 //     );
 // }
-
 
 export default Lesson36;
