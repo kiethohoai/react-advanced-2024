@@ -9,16 +9,13 @@ class Lesson30 extends React.Component {
     }
 
     handleClick = () => {
-        this.setState({ count: this.state.count + 1 });
-        this.setState({ count: this.state.count + 1 });
-        this.setState({ count: this.state.count + 1 });
+      // this.setState({ count: this.state.count + 1 });
+      // this.setState({ count: this.state.count + 1 });
+      // this.setState({ count: this.state.count + 1 });
 
-        // this.setState(
-        //     { count: this.state.count + 1 },
-        //     () => {
-        //         console.log(">>> check count = ", this.state.count); //count = 1
-        //     });
-
+      this.setState({ count: this.state.count + 1 }, () => {
+        console.log(">>> check count = ", this.state.count); //count = 1
+      });
     }
 
     render() {
