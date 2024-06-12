@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useImmer } from "use-immer";
 
 const Lesson331 = (props) => {
   // const [person, setPerson] = useState({
@@ -7,7 +8,17 @@ const Lesson331 = (props) => {
   //   password: "",
   // });
 
-  const [person, setPerson] = useState({
+  // const [person, setPerson] = useState({
+  //   username: "",
+  //   email: "hohoaikiet@gmail.com",
+  //   password: "",
+  //   address: {
+  //     province: "Ha Noi",
+  //     country: "Viet Nam",
+  //   },
+  // });
+
+  const [person, setPerson] = useImmer({
     username: "",
     email: "hohoaikiet@gmail.com",
     password: "",
@@ -18,8 +29,6 @@ const Lesson331 = (props) => {
   });
 
   const handleOnChangeUsername = (event) => {
-    // person.username = event.target.value;
-    //not merge
     setPerson({ ...person, username: event.target.value });
   };
 
@@ -28,14 +37,31 @@ const Lesson331 = (props) => {
   };
 
   const handleChangeInput = (event) => {
-    //one event handler for all (using name attribute)
-    //   console.log("🚀CHECK  event.target.name =>", event.target.name);
     setPerson({
       ...person,
       [event.target.name]: event.target.value,
     });
   };
 
+  // handleOnChangeCountry
+  const handleOnChangeCountry = (event) => {
+    // Use Spread Method
+    // setPerson({
+    //   ...person,
+    //   address: {
+    //     ...person.address,
+    //     [event.target.name]: event.target.value,
+    //   },
+    // });
+    //
+    // #2 Use useImmer Library
+    setPerson((draft) => {
+      // Modify state & draft is a state's clone
+      draft.address.country = event.target.value;
+    });
+  };
+
+  console.log("🚀CHECK  person =>", person);
   return (
     <div>
       <div className="input-group">
@@ -65,11 +91,21 @@ const Lesson331 = (props) => {
           onChange={(event) => handleChangeInput(event)}
         />
       </div>
+      {/* country */}
+      <div className="input-group">
+        <label>Country</label>
+        <input
+          type={"text"}
+          value={person.address.country}
+          onChange={(event) => handleOnChangeCountry(event)}
+          name="country"
+        />
+      </div>
       <div>
         <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );
-}
+};
 
 export default Lesson331;
