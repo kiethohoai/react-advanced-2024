@@ -38,24 +38,36 @@ const Lesson39 = (props) => {
       ],
     };
 
-    // Define a users schema
-    const user = new schema.Entity("users");
-
-    // Define your comments schema
-    const comment = new schema.Entity("comments", {
-      commenter: user,
+    const userSchema = new schema.Entity("users");
+    const commentSchema = new schema.Entity("comments", {
+      commenter: userSchema,
     });
 
-    // Define your article
-    const article = new schema.Entity("articles", {
-      // <= define an oject
-      author: user,
-      comments: [comment],
+    const myData = new schema.Object({
+      author: userSchema,
+      comments: [commentSchema],
     });
 
-    const normalizedData = normalize(myPost, article);
+    const resultData = normalize(myPost, myData);
+    console.log("🚀CHECK  resultData =>", resultData);
 
-    console.log(">>> check example1 normalizedData : ", normalizedData);
+    // // Define a users schema
+    // const user = new schema.Entity("users");
+
+    // // Define your comments schema
+    // const comment = new schema.Entity("comments", {
+    //   commenter: user,
+    // });
+
+    // // Define your article
+    // const article = new schema.Entity("articles", {
+    //   // <= define an oject
+    //   author: user,
+    //   comments: [comment],
+    // });
+
+    // const normalizedData = normalize(myPost, article);
+    // console.log(">>> check example1 normalizedData : ", normalizedData);
   }
 
   //exmaple with array
