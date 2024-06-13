@@ -4,7 +4,7 @@ import QuizQA from "./QA/QuizQA";
 const Lesson39 = (props) => {
   const runExample1 = false;
   const runExample2 = false;
-  const runExample3 = true;
+  const runExample3 = false;
 
   //example with object
   if (runExample1) {
@@ -249,7 +249,7 @@ const Lesson39 = (props) => {
   return (
     <div>
       <div>L392: Normalized Data </div>
-      {/* <QuizQA /> */}
+      <QuizQA />
     </div>
   );
 };

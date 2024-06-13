@@ -1,35 +1,59 @@
-import { useEffect, useState } from 'react';
-import Select from 'react-select';
-import './QuizQA.scss';
-import { BsFillPatchPlusFill } from 'react-icons/bs';
-import { BsPatchMinusFill } from 'react-icons/bs';
-import { AiOutlineMinusCircle } from 'react-icons/ai';
-import { AiFillPlusSquare } from 'react-icons/ai';
-import { RiImageAddFill } from 'react-icons/ri';
-import { v4 as uuidv4 } from 'uuid';
-import _ from 'lodash';
-import Lightbox from 'react-awesome-lightbox';
+import { useEffect, useState } from "react";
+import Select from "react-select";
+import "./QuizQA.scss";
+import { BsFillPatchPlusFill } from "react-icons/bs";
+import { BsPatchMinusFill } from "react-icons/bs";
+import { AiOutlineMinusCircle } from "react-icons/ai";
+import { AiFillPlusSquare } from "react-icons/ai";
+import { RiImageAddFill } from "react-icons/ri";
+import { v4 as uuidv4 } from "uuid";
+import _ from "lodash";
+import Lightbox from "react-awesome-lightbox";
 import {
   getQuizWithQA,
   getAllQuizForAdmin,
   postUpsertQA,
-} from '../../../utils/apiService';
-import { toast } from 'react-toastify';
-import 'react-awesome-lightbox/build/style.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { normalize, schema } from 'normalizr';
+} from "../../../utils/apiService";
+import { toast } from "react-toastify";
+import "react-awesome-lightbox/build/style.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { normalize, schema } from "normalizr";
 
 const QuizQA = (props) => {
+  // PROPS & STATE
+  const idQuestion = uuidv4();
+  const idAnswer = uuidv4();
+  const [newQuestions, setNewQuestions] = useState({
+    [idQuestion]: {
+      id: idQuestion,
+      description: "",
+      imageFile: "",
+      imageName: "",
+      answers: [idAnswer],
+    },
+  });
+
+  const [newAnswers, setNewAnswers] = useState({
+    [idAnswer]: {
+      id: idAnswer,
+      description: "",
+      isCorrect: false,
+    },
+  });
+
+  console.log("🚀CHECK  newQuestions =>", newQuestions);
+  console.log("🚀CHECK  newAnswers =>", newAnswers);
+
   const initQuestions = [
     {
       id: uuidv4(),
-      description: '',
-      imageFile: '',
-      imageName: '',
+      description: "",
+      imageFile: "",
+      imageName: "",
       answers: [
         {
           id: uuidv4(),
-          description: '',
+          description: "",
           isCorrect: false,
         },
       ],
@@ -37,11 +61,10 @@ const QuizQA = (props) => {
   ];
 
   const [questions, setQuestions] = useState(initQuestions);
-
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   const [dataImagePreview, setDataImagePreview] = useState({
-    title: '',
-    url: '',
+    title: "",
+    url: "",
   });
 
   const [listQuiz, setListQuiz] = useState([]);
@@ -68,6 +91,7 @@ const QuizQA = (props) => {
       });
   }
 
+  // TASK HERE
   const fetchQuizWithQA = async () => {
     let rs = await getQuizWithQA(selectedQuiz.value);
     if (rs && rs.EC === 0) {
@@ -80,22 +104,30 @@ const QuizQA = (props) => {
           q.imageFile = await urltoFile(
             `data:image/png;base64,${q.imageFile}`,
             `Question-${q.id}.png`,
-            'image/png',
+            "image/png",
           );
         }
         newQA.push(q);
       }
-      setQuestions(newQA);
+      // setQuestions(newQA);
+      // console.log("🚀CHECK  newQA =>", newQA);
+
       //Normalize Data
-      const answer = new schema.Entity('answer');
-      const question = new schema.Entity('questions', {
-        answers: [answer],
+      const answerSchema = new schema.Entity("answers");
+      const questionSchema = new schema.Entity("questions", {
+        answers: [answerSchema],
       });
-      //   const quiz = new schema.Entity('quiz', [question]);
-      const normalizeData = normalize(newQA, question);
-      console.log('🚀CHECK  normalizeData =>', normalizeData);
+
+      // const myData = [questionSchema];
+      const myData = new schema.Array(questionSchema);
+      const resultData = normalize(newQA, myData);
+      console.log("🚀CHECK  resultData =>", resultData);
+
+      setNewQuestions(resultData?.entities?.questions);
+      setNewAnswers(resultData?.entities?.answers);
     }
   };
+  //
   const fetchQuiz = async () => {
     let res = await getAllQuizForAdmin();
     if (res && res.EC === 0) {
@@ -110,16 +142,16 @@ const QuizQA = (props) => {
   };
 
   const handleAddRemoveQuestion = (type, id) => {
-    if (type === 'ADD') {
+    if (type === "ADD") {
       const newQuestion = {
         id: uuidv4(),
-        description: '',
-        imageFile: '',
-        imageName: '',
+        description: "",
+        imageFile: "",
+        imageName: "",
         answers: [
           {
             id: uuidv4(),
-            description: '',
+            description: "",
             isCorrect: false,
           },
         ],
@@ -127,7 +159,7 @@ const QuizQA = (props) => {
 
       setQuestions([...questions, newQuestion]);
     }
-    if (type === 'REMOVE') {
+    if (type === "REMOVE") {
       let questionsClone = _.cloneDeep(questions);
       questionsClone = questionsClone.filter((item) => item.id !== id);
       setQuestions(questionsClone);
@@ -136,10 +168,10 @@ const QuizQA = (props) => {
 
   const handleAddRemoveAnswer = (type, questionId, anwserId) => {
     let questionsClone = _.cloneDeep(questions);
-    if (type === 'ADD') {
+    if (type === "ADD") {
       const newAnswer = {
         id: uuidv4(),
-        description: '',
+        description: "",
         isCorrect: false,
       };
 
@@ -147,7 +179,7 @@ const QuizQA = (props) => {
       questionsClone[index].answers.push(newAnswer);
       setQuestions(questionsClone);
     }
-    if (type === 'REMOVE') {
+    if (type === "REMOVE") {
       let index = questionsClone.findIndex((item) => item.id === questionId);
       questionsClone[index].answers = questionsClone[index].answers.filter(
         (item) => item.id !== anwserId,
@@ -157,7 +189,7 @@ const QuizQA = (props) => {
   };
 
   const handleOnChange = (type, questionId, value) => {
-    if (type === 'QUESTION') {
+    if (type === "QUESTION") {
       let questionsClone = _.cloneDeep(questions);
 
       let index = questionsClone.findIndex((item) => item.id === questionId);
@@ -191,10 +223,10 @@ const QuizQA = (props) => {
       questionsClone[index].answers = questionsClone[index].answers.map(
         (answer) => {
           if (answer.id === answerId) {
-            if (type === 'CHECKBOX') {
+            if (type === "CHECKBOX") {
               answer.isCorrect = value;
             }
-            if (type === 'INPUT') {
+            if (type === "INPUT") {
               answer.description = value;
             }
           }
@@ -209,7 +241,7 @@ const QuizQA = (props) => {
   const handleSubmitQuestionForQuiz = async () => {
     //todo
     if (_.isEmpty(selectedQuiz)) {
-      toast.error('Please choose a Quiz!');
+      toast.error("Please choose a Quiz!");
       return;
     }
 
@@ -316,7 +348,7 @@ const QuizQA = (props) => {
                       value={question.description}
                       onChange={(event) =>
                         handleOnChange(
-                          'QUESTION',
+                          "QUESTION",
                           question.id,
                           event.target.value,
                         )
@@ -333,30 +365,30 @@ const QuizQA = (props) => {
                       onChange={(event) =>
                         handleOnChangeFileQuestion(question.id, event)
                       }
-                      type={'file'}
+                      type={"file"}
                       hidden
                     />
                     <span>
                       {question.imageName ? (
                         <span
-                          style={{ cursor: 'pointer' }}
+                          style={{ cursor: "pointer" }}
                           onClick={() => handlePreviewImage(question.id)}
                         >
                           {question.imageName}
                         </span>
                       ) : (
-                        '0 file is uploaded'
+                        "0 file is uploaded"
                       )}
                     </span>
                   </div>
                   <div className="btn-add">
-                    <span onClick={() => handleAddRemoveQuestion('ADD', '')}>
+                    <span onClick={() => handleAddRemoveQuestion("ADD", "")}>
                       <BsFillPatchPlusFill className="icon-add" />
                     </span>
                     {questions.length > 1 && (
                       <span
                         onClick={() =>
-                          handleAddRemoveQuestion('REMOVE', question.id)
+                          handleAddRemoveQuestion("REMOVE", question.id)
                         }
                       >
                         <BsPatchMinusFill className="icon-remove" />
@@ -376,7 +408,7 @@ const QuizQA = (props) => {
                           checked={answer.isCorrect}
                           onChange={(event) =>
                             handleAnswerQuestion(
-                              'CHECKBOX',
+                              "CHECKBOX",
                               answer.id,
                               question.id,
                               event.target.checked,
@@ -391,7 +423,7 @@ const QuizQA = (props) => {
                             placeholder="name@example.com"
                             onChange={(event) =>
                               handleAnswerQuestion(
-                                'INPUT',
+                                "INPUT",
                                 answer.id,
                                 question.id,
                                 event.target.value,
@@ -403,7 +435,7 @@ const QuizQA = (props) => {
                         <div className="btn-group">
                           <span
                             onClick={() =>
-                              handleAddRemoveAnswer('ADD', question.id)
+                              handleAddRemoveAnswer("ADD", question.id)
                             }
                           >
                             <AiFillPlusSquare className="icon-add" />
@@ -412,7 +444,7 @@ const QuizQA = (props) => {
                             <span
                               onClick={() =>
                                 handleAddRemoveAnswer(
-                                  'REMOVE',
+                                  "REMOVE",
                                   question.id,
                                   answer.id,
                                 )
