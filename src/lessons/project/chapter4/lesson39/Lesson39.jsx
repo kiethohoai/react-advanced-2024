@@ -3,8 +3,8 @@ import QuizQA from "./QA/QuizQA";
 
 const Lesson39 = (props) => {
   const runExample1 = false;
-  const runExample2 = true;
-  const runExample3 = false;
+  const runExample2 = false;
+  const runExample3 = true;
 
   //example with object
   if (runExample1) {
@@ -222,13 +222,27 @@ const Lesson39 = (props) => {
       ],
     };
 
+    // CACH 1 SEFL-LEARNING
+    const answerSchema = new schema.Entity("answers");
+    const questionSchema = new schema.Entity("questions", {
+      answers: [answerSchema],
+    });
+
+    const myQuiz = new schema.Object({
+      questions: [questionSchema],
+      answers: [answerSchema],
+    });
+
+    const quizData = normalize(quiz, myQuiz);
+    console.log("🚀CHECK  quizData =>", quizData);
+
+    // CACH 2
     const answer = new schema.Entity("answer");
     const question = new schema.Entity("question", {
       answers: [answer],
     });
     const q = new schema.Entity("quiz", { questions: [question] });
     const normalizedData2 = normalize(quiz, q);
-
     console.log(">>> check example3 normalizedData : ", normalizedData2);
   }
 
