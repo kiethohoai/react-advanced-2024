@@ -3,7 +3,7 @@ import QuizQA from "./QA/QuizQA";
 
 const Lesson39 = (props) => {
   const runExample1 = false;
-  const runExample2 = false;
+  const runExample2 = true;
   const runExample3 = false;
 
   //example with object
@@ -154,10 +154,22 @@ const Lesson39 = (props) => {
       },
     ];
 
-    // Define a users schema
-    const user = new schema.Entity("users");
+    const userSchema = new schema.Entity("users");
+    const commentSchema = new schema.Entity("comments", {
+      commenter: userSchema,
+    });
 
-    // Define your comments schema
+    const myData1 = new schema.Entity("myData1", {
+      author: userSchema,
+      comments: [commentSchema],
+    });
+
+    const myData2 = [myData1];
+    const resultData = normalize(myPost, myData2);
+    console.log("🚀CHECK  resultData =>", resultData);
+
+    // PART2
+    const user = new schema.Entity("users");
     const comment = new schema.Entity("comments", {
       commenter: user,
     });
